@@ -129,14 +129,14 @@ namespace ArrayVisualizer
             this.sortDurationLabel.AutoSize = true;
             this.sortDurationLabel.Location = new System.Drawing.Point(284, 39);
             this.sortDurationLabel.Name = "sortDurationLabel";
-            this.sortDurationLabel.Size = new System.Drawing.Size(13, 15);
+            this.sortDurationLabel.Size = new System.Drawing.Size(32, 15);
             this.sortDurationLabel.TabIndex = 6;
-            this.sortDurationLabel.Text = "0";
+            this.sortDurationLabel.Text = "0 ms";
             // 
             // numIndLabel
             // 
             this.numIndLabel.AutoSize = true;
-            this.numIndLabel.Location = new System.Drawing.Point(495, 40);
+            this.numIndLabel.Location = new System.Drawing.Point(444, 40);
             this.numIndLabel.Name = "numIndLabel";
             this.numIndLabel.Size = new System.Drawing.Size(13, 15);
             this.numIndLabel.TabIndex = 8;
@@ -147,9 +147,9 @@ namespace ArrayVisualizer
             this.swappedLabel.AutoSize = true;
             this.swappedLabel.Location = new System.Drawing.Point(382, 39);
             this.swappedLabel.Name = "swappedLabel";
-            this.swappedLabel.Size = new System.Drawing.Size(107, 15);
+            this.swappedLabel.Size = new System.Drawing.Size(56, 15);
             this.swappedLabel.TabIndex = 7;
-            this.swappedLabel.Text = "# indices swapped:";
+            this.swappedLabel.Text = "# Swaps: ";
             // 
             // Form1
             // 

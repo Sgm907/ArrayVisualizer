@@ -85,6 +85,8 @@ namespace ArrayVisualizer
 
             timer.Stop();
             #endregion
+
+            //Creates a dictionary full of the various sorting algorithms, and then populates the selector box with them
             #region initialize ComboBox
 
             algorithms.Add("Selection", Algorithms.SelectionSort);
@@ -99,6 +101,9 @@ namespace ArrayVisualizer
 
         }
 
+        /// <summary>
+        /// Creates a new thread to sort and draw the array while the program runs
+        /// </summary>
         private void Update(Object sender, EventArgs e)
         {
             if (!updateStarted)
@@ -111,6 +116,9 @@ namespace ArrayVisualizer
             Invalidate();
         }
 
+        /// <summary>
+        /// iterates through the steps provided to the form by the sorter
+        /// </summary>
         private void FollowSort()
         {
             for (int i = 0; i < instructions.Count; i++)
@@ -210,7 +218,7 @@ namespace ArrayVisualizer
                 sorter.Scramble(ref drawingArray);
                 Invalidate();
                 numIndLabel.Text = "0";
-                sortDurationLabel.Text = "0";
+                sortDurationLabel.Text = "0" + " ms";
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,6 +20,21 @@ namespace ArrayVisualizer
         public static Func<object> MethodStorage<T>(Func<T> func)
         {
             return () => func();
+        }
+
+        /// <summary>
+        /// Blocks the thread for a set time
+        /// </summary>
+        /// <param name="duration">How long to block the thread, in seconds</param>
+        public static void BlockThread(double duration)
+        {
+            var durationTicks = Math.Round(duration * Stopwatch.Frequency);
+            var sw = Stopwatch.StartNew();
+
+            while (sw.ElapsedTicks < durationTicks)
+            {
+
+            }
         }
     }
 }

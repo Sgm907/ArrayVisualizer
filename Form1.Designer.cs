@@ -34,6 +34,9 @@ namespace ArrayVisualizer
             this.SortButton = new System.Windows.Forms.Button();
             this.AlgorithmSelect = new System.Windows.Forms.ComboBox();
             this.ScrambleButton = new System.Windows.Forms.Button();
+            this.visualDelay = new System.Windows.Forms.NumericUpDown();
+            this.delayLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.visualDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // timer
@@ -44,6 +47,7 @@ namespace ArrayVisualizer
             // 
             // SortButton
             // 
+            this.SortButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SortButton.Location = new System.Drawing.Point(851, 36);
             this.SortButton.Name = "SortButton";
             this.SortButton.Size = new System.Drawing.Size(75, 23);
@@ -54,6 +58,7 @@ namespace ArrayVisualizer
             // 
             // AlgorithmSelect
             // 
+            this.AlgorithmSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AlgorithmSelect.DisplayMember = "2";
             this.AlgorithmSelect.FormattingEnabled = true;
             this.AlgorithmSelect.Items.AddRange(new object[] {
@@ -71,6 +76,7 @@ namespace ArrayVisualizer
             // 
             // ScrambleButton
             // 
+            this.ScrambleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScrambleButton.Location = new System.Drawing.Point(960, 35);
             this.ScrambleButton.Name = "ScrambleButton";
             this.ScrambleButton.Size = new System.Drawing.Size(75, 23);
@@ -79,21 +85,52 @@ namespace ArrayVisualizer
             this.ScrambleButton.UseVisualStyleBackColor = true;
             this.ScrambleButton.Click += new System.EventHandler(this.ScrambleButton_Click);
             // 
+            // visualDelay
+            // 
+            this.visualDelay.Location = new System.Drawing.Point(34, 35);
+            this.visualDelay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.visualDelay.Name = "visualDelay";
+            this.visualDelay.Size = new System.Drawing.Size(41, 23);
+            this.visualDelay.TabIndex = 3;
+            this.visualDelay.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // delayLabel
+            // 
+            this.delayLabel.AutoSize = true;
+            this.delayLabel.Location = new System.Drawing.Point(76, 40);
+            this.delayLabel.Name = "delayLabel";
+            this.delayLabel.Size = new System.Drawing.Size(96, 15);
+            this.delayLabel.TabIndex = 4;
+            this.delayLabel.Text = "Visual delay (ms)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1075, 608);
+            this.Controls.Add(this.delayLabel);
+            this.Controls.Add(this.visualDelay);
             this.Controls.Add(this.ScrambleButton);
             this.Controls.Add(this.AlgorithmSelect);
             this.Controls.Add(this.SortButton);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Array Visualizer";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Resize += new System.EventHandler(this.Form1_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.visualDelay)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,6 +140,8 @@ namespace ArrayVisualizer
         private System.Windows.Forms.ComboBox AlgorithmSelect;
         private System.Windows.Forms.Button ScrambleButton;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.NumericUpDown visualDelay;
+        private System.Windows.Forms.Label delayLabel;
     }
 }
 

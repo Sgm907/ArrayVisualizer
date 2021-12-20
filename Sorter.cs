@@ -14,7 +14,7 @@ namespace ArrayVisualizer
         public Sorter(int[] array)
         {
             rng = new Random();
-            algorithm = Algorithms.Unoptomized;
+            algorithm = Algorithms.SelectionSort;
             //targetArray = Enumerable.Range(1, size).ToArray();
         }
 

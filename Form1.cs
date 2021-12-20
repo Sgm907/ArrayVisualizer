@@ -19,8 +19,13 @@ namespace ArrayVisualizer
         private Dictionary<string, Func<int[], ArrayList>> algorithms;
 
         private ArrayList instructions;
+        private (int, int) lastStep;
         private int[] drawingArray;
         private bool updateStarted;
+
+        private bool verify;
+        private int verifyIndex;
+        private bool sorted;
 
         private Pen pen;
         private Brush brush;
@@ -29,7 +34,7 @@ namespace ArrayVisualizer
         private float visualWidth;
         private float rectWidth;
         private float rectMaxHeight;
-        public int arraySize = 2048;
+        public int arraySize = 256;
         int buffer;
 
         //control variables;
@@ -68,12 +73,20 @@ namespace ArrayVisualizer
             algorithms = new Dictionary<string, Func<int[], ArrayList>>();
 
             instructions = new ArrayList();
+            lastStep = (-1, -1);
             updateStarted = true;
+
+            verify = false;
+            verifyIndex = 0;
+            sorted = true;
+
             timer.Stop();
             #endregion
             #region initialize ComboBox
 
-            algorithms.Add("Unoptomized", Algorithms.Unoptomized);
+            algorithms.Add("Selection", Algorithms.SelectionSort);
+            algorithms.Add("Insert", Algorithms.InsertSort);
+            algorithms.Add("Bubble", Algorithms.BubbleSort);
             AlgorithmSelect.ValueMember = "Value";
             AlgorithmSelect.DisplayMember = "Key";
             AlgorithmSelect.DataSource = new BindingSource(algorithms, null);
@@ -99,16 +112,34 @@ namespace ArrayVisualizer
             for (int i = 0; i < instructions.Count; i++)
             {
                 (int, int) step = ((int, int))instructions[i];
+                lastStep = step;
                 int temp = drawingArray[step.Item1];
                 drawingArray[step.Item1] = drawingArray[step.Item2];
                 drawingArray[step.Item2] = temp;
-                Thread.Sleep(10);
+                Helper.BlockThread((double)visualDelay.Value / 1000);
+            }
+            Verify();
+        }
+
+        private void Verify()
+        {
+            verify = true;
+            for (int i = 0; i < drawingArray.Length - 1; i++)
+            {
+                if (drawingArray[i] > drawingArray[i + 1])
+                {
+                    sorted = false;
+                    break;
+                }
+                verifyIndex = i+1;
+                Helper.BlockThread(0.005);
             }
         }
         #endregion
 
         private void SortButton_Click(object sender, EventArgs e)
         {
+            verify = false;
             if (!sort.IsAlive)
             {
                 instructions = sorter.Sort(drawingArray);
@@ -128,8 +159,31 @@ namespace ArrayVisualizer
         {
             for (int i = 0; i < arraySize; i++)
             {
-                float rectHeight = (rectMaxHeight/arraySize)* drawingArray[i];
-                e.Graphics.FillRectangle(brush, 10+(rectWidth*i), Height-rectHeight- buffer, rectWidth, rectHeight);
+                if (!verify)
+                {
+                    if (i == lastStep.Item1)
+                        pen.Color = Color.Red;
+                    else if (i == lastStep.Item2)
+                        pen.Color = Color.Green;
+                    else
+                        pen.Color = Color.White;
+                }
+                else
+                {
+                    if (sorted)
+                    {
+                        if (i <= verifyIndex)
+                            pen.Color = Color.Green;
+                        else
+                            pen.Color = Color.White;
+                    }
+                    else
+                    {
+                        pen.Color = Color.Red;
+                    }
+                }
+                float rectHeight = (rectMaxHeight / arraySize) * drawingArray[i];
+                e.Graphics.DrawRectangle(pen, 10 + (rectWidth * i), Height - rectHeight - buffer, rectWidth, rectHeight);
             }
         }
 
@@ -143,12 +197,12 @@ namespace ArrayVisualizer
 
         private void ScrambleButton_Click(object sender, EventArgs e)
         {
+            verify = false;
             if (!sort.IsAlive)
             {
                 sorter.Scramble(ref drawingArray);
                 Invalidate();
             }
         }
-
     }
 }

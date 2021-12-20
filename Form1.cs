@@ -52,6 +52,9 @@ namespace ArrayVisualizer
         private void InitializeObjects()
         {
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             #region initialize Form Objects
             rng = new Random();
@@ -87,6 +90,7 @@ namespace ArrayVisualizer
             algorithms.Add("Selection", Algorithms.SelectionSort);
             algorithms.Add("Insert", Algorithms.InsertSort);
             algorithms.Add("Bubble", Algorithms.BubbleSort);
+            algorithms.Add("Gnome", Algorithms.GnomeSort);
             AlgorithmSelect.ValueMember = "Value";
             AlgorithmSelect.DisplayMember = "Key";
             AlgorithmSelect.DataSource = new BindingSource(algorithms, null);
@@ -142,7 +146,10 @@ namespace ArrayVisualizer
             verify = false;
             if (!sort.IsAlive)
             {
-                instructions = sorter.Sort(drawingArray);
+                double tempDuration = 0;
+                instructions = sorter.Sort(drawingArray, ref tempDuration);
+                sortDurationLabel.Text = tempDuration.ToString() + " ms";
+                numIndLabel.Text = instructions.Count.ToString();
                 timer.Start();
                 updateStarted = false;
                 Invalidate();
@@ -202,6 +209,8 @@ namespace ArrayVisualizer
             {
                 sorter.Scramble(ref drawingArray);
                 Invalidate();
+                numIndLabel.Text = "0";
+                sortDurationLabel.Text = "0";
             }
         }
     }

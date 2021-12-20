@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -8,23 +9,28 @@ namespace ArrayVisualizer
 {
     class Sorter
     {
-        Func<int[], ArrayList> algorithm;
-        Random rng;
+        private Func<int[], ArrayList> algorithm;
+        private Random rng;
+        private Stopwatch sortTimer;
 
         public Sorter(int[] array)
         {
             rng = new Random();
             algorithm = Algorithms.SelectionSort;
-            //targetArray = Enumerable.Range(1, size).ToArray();
+            sortTimer = new Stopwatch();
         }
 
         /// <summary>
         /// Sorts the array using the set algorithm
         /// </summary>
         /// <returns>Returns true when the sort succeeds</returns>
-        public ArrayList Sort(int[] targetArray)
+        public ArrayList Sort(int[] targetArray, ref double sortTime)
         {
-            return algorithm.Invoke(targetArray);
+            sortTimer.Restart();
+            ArrayList value = algorithm.Invoke(targetArray);
+            sortTimer.Stop();
+            sortTime = sortTimer.Elapsed.TotalMilliseconds;
+            return value;
         }
 
 

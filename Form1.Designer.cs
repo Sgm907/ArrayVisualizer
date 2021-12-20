@@ -36,6 +36,10 @@ namespace ArrayVisualizer
             this.ScrambleButton = new System.Windows.Forms.Button();
             this.visualDelay = new System.Windows.Forms.NumericUpDown();
             this.delayLabel = new System.Windows.Forms.Label();
+            this.sortLabel = new System.Windows.Forms.Label();
+            this.sortDurationLabel = new System.Windows.Forms.Label();
+            this.numIndLabel = new System.Windows.Forms.Label();
+            this.swappedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.visualDelay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,12 +115,52 @@ namespace ArrayVisualizer
             this.delayLabel.TabIndex = 4;
             this.delayLabel.Text = "Visual delay (ms)";
             // 
+            // sortLabel
+            // 
+            this.sortLabel.AutoSize = true;
+            this.sortLabel.Location = new System.Drawing.Point(198, 39);
+            this.sortLabel.Name = "sortLabel";
+            this.sortLabel.Size = new System.Drawing.Size(80, 15);
+            this.sortLabel.TabIndex = 5;
+            this.sortLabel.Text = "Sort Duration:";
+            // 
+            // sortDurationLabel
+            // 
+            this.sortDurationLabel.AutoSize = true;
+            this.sortDurationLabel.Location = new System.Drawing.Point(284, 39);
+            this.sortDurationLabel.Name = "sortDurationLabel";
+            this.sortDurationLabel.Size = new System.Drawing.Size(13, 15);
+            this.sortDurationLabel.TabIndex = 6;
+            this.sortDurationLabel.Text = "0";
+            // 
+            // numIndLabel
+            // 
+            this.numIndLabel.AutoSize = true;
+            this.numIndLabel.Location = new System.Drawing.Point(495, 40);
+            this.numIndLabel.Name = "numIndLabel";
+            this.numIndLabel.Size = new System.Drawing.Size(13, 15);
+            this.numIndLabel.TabIndex = 8;
+            this.numIndLabel.Text = "0";
+            // 
+            // swappedLabel
+            // 
+            this.swappedLabel.AutoSize = true;
+            this.swappedLabel.Location = new System.Drawing.Point(382, 39);
+            this.swappedLabel.Name = "swappedLabel";
+            this.swappedLabel.Size = new System.Drawing.Size(107, 15);
+            this.swappedLabel.TabIndex = 7;
+            this.swappedLabel.Text = "# indices swapped:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1075, 608);
+            this.Controls.Add(this.numIndLabel);
+            this.Controls.Add(this.swappedLabel);
+            this.Controls.Add(this.sortDurationLabel);
+            this.Controls.Add(this.sortLabel);
             this.Controls.Add(this.delayLabel);
             this.Controls.Add(this.visualDelay);
             this.Controls.Add(this.ScrambleButton);
@@ -142,6 +186,10 @@ namespace ArrayVisualizer
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.NumericUpDown visualDelay;
         private System.Windows.Forms.Label delayLabel;
+        private System.Windows.Forms.Label sortLabel;
+        private System.Windows.Forms.Label sortDurationLabel;
+        private System.Windows.Forms.Label numIndLabel;
+        private System.Windows.Forms.Label swappedLabel;
     }
 }
 

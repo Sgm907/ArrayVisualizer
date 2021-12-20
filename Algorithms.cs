@@ -21,7 +21,6 @@ namespace ArrayVisualizer
         /// <returns>The instructions for the visualizer</returns>
         public static ArrayList SelectionSort(int[] startArray)
         {
-
             int[] array = new int[startArray.Length];
             startArray.CopyTo(array, 0);
             ArrayList instructions = new ArrayList();
@@ -89,6 +88,35 @@ namespace ArrayVisualizer
                         array[j + 1] = temp;
                         instructions.Add((j + 1, j));
                     }
+                }
+            }
+            return instructions;
+        }
+
+        /// <summary>
+        /// A sorting algorithm which moves forward and backwards through the array until the indice it's moving is in the correct place
+        /// </summary>
+        /// <param name="startArray">The array to be sorted</param>
+        /// <returns>The instructions for the visualizer</returns>
+        public static ArrayList GnomeSort(int[] startArray)
+        {
+            int[] array = new int[startArray.Length];
+            startArray.CopyTo(array, 0);
+            ArrayList instructions = new ArrayList();
+            int i = 0;
+            while (i < array.Length)
+            {
+                if (i == 0)
+                    i++;
+                if (array[i] >= array[i - 1])
+                    i++;
+                else
+                {
+                    int temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                    instructions.Add((i, i - 1));
+                    i--;
                 }
             }
             return instructions;
